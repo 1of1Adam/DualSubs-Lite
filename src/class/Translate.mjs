@@ -492,6 +492,7 @@ Rules:
 				],
 				temperature: 0.3,
 			}),
+			timeout: 300, // 5分钟超时，大模型翻译需要更长时间
 		};
 
 		return await fetch(request)

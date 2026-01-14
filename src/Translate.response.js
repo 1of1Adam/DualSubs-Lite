@@ -156,6 +156,9 @@ async function Translator(vendor = "OpenAI", method = "Part", text = [], [source
 		case "OpenAI":
 			// 大模型一次处理所有字幕，减少请求次数
 			length = 2000;
+			// OpenAI 使用无限重试，等待直到成功
+			times = -1;
+			interval = 5000; // 重试间隔 5 秒
 			break;
 	}
 	let Translation = [];
