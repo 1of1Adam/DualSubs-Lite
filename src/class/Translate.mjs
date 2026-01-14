@@ -459,21 +459,21 @@ export default class Translate {
 		const sourceLang = this.#LanguagesCode.Google[source] ?? source.toLowerCase();
 		const targetLang = this.#LanguagesCode.Google[target] ?? target.toLowerCase();
 
-		// 硬编码默认配置
-		const defaultConfig = {
-			base_url: "http://127.0.0.1:8317/v1",
-			api_key: "1",
-			model: "gemini-3-flash-preview"
-		};
+		// 硬编码配置（直接使用，不依赖外部传入）
+		const BASE_URL = "http://127.0.0.1:8317/v1";
+		const API_KEY = "1";
+		const MODEL = "gemini-3-flash-preview";
+
+		Console.log(`🔑 OpenAI API: ${BASE_URL}, model: ${MODEL}`);
 
 		const request = {
-			url: `${api?.base_url || defaultConfig.base_url}/chat/completions`,
+			url: `${BASE_URL}/chat/completions`,
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": `Bearer ${api?.api_key || defaultConfig.api_key}`,
+				"Authorization": `Bearer ${API_KEY}`,
 			},
 			body: JSON.stringify({
-				model: api?.model || defaultConfig.model,
+				model: MODEL,
 				messages: [
 					{
 						role: "system",
