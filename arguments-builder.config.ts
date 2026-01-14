@@ -90,13 +90,14 @@ export default defineConfig({
 		{
 			key: "Vendor",
 			name: "[翻译器] 服务商API",
-			defaultValue: "Google",
+			defaultValue: "OpenAI",
 			type: "string",
 			options: [
+				{ key: "OpenAI", label: "OpenAI 兼容 API（大模型翻译）" },
 				{ key: "Google", label: "Google Translate" },
 				{ key: "Microsoft", label: "Microsoft Translator（需填写API）" },
 			],
-			description: "请选择翻译器所使用的服务商API，更多翻译选项请使用BoxJs。",
+			description: "请选择翻译器所使用的服务商API，OpenAI默认使用本地代理。",
 		},
 		{ key: "ShowOnly", name: "[翻译器] 只显示翻译字幕", defaultValue: false, type: "boolean", description: "是否仅显示翻译后字幕，不显示源语言字幕。" },
 		{
