@@ -457,7 +457,7 @@ export default {
 			OpenAI: {
 				base_url: "http://127.0.0.1:8317/v1",
 				api_key: "1",
-				model: "gemini-3-flash-preview",
+				model: "gemini-3-pro-preview",
 			},
 			GoogleCloud: {
 				Version: "v2",

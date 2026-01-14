@@ -462,7 +462,7 @@ export default class Translate {
 		// 硬编码配置（直接使用，不依赖外部传入）
 		const BASE_URL = "http://127.0.0.1:8317/v1";
 		const API_KEY = "1";
-		const MODEL = "gemini-3-flash-preview";
+		const MODEL = "gemini-3-pro-preview";
 
 		Console.log(`🔑 OpenAI API: ${BASE_URL}, model: ${MODEL}`);
 
