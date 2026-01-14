@@ -133,7 +133,7 @@ Console.info(`FORMAT: ${FORMAT}`);
  *
  * @return {Promise<*>}
  */
-async function Translator(vendor = "Google", method = "Part", text = [], [source = "AUTO", target = "ZH"], API = {}, times = 3, interval = 100, exponential = true) {
+async function Translator(vendor = "OpenAI", method = "Part", text = [], [source = "AUTO", target = "ZH"], API = {}, times = 3, interval = 100, exponential = true) {
 	Console.log("☑️ Translator", `vendor: ${vendor}`, `method: ${method}`, `[source, target]: ${[source, target]}`);
 	// 翻译长度设置
 	let length = 127;

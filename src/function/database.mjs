@@ -435,7 +435,7 @@ export default {
 	},
 	Translate: {
 		Settings: {
-			Vendor: "Google",
+			Vendor: "OpenAI",
 			ShowOnly: false,
 			Position: "Forward",
 			CacheSize: 10,
@@ -454,6 +454,11 @@ export default {
 	},
 	API: {
 		Settings: {
+			OpenAI: {
+				base_url: "http://127.0.0.1:8317/v1",
+				api_key: "1",
+				model: "gemini-3-flash-preview",
+			},
 			GoogleCloud: {
 				Version: "v2",
 				Mode: "Key",

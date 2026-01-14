@@ -459,14 +459,21 @@ export default class Translate {
 		const sourceLang = this.#LanguagesCode.Google[source] ?? source.toLowerCase();
 		const targetLang = this.#LanguagesCode.Google[target] ?? target.toLowerCase();
 
+		// 硬编码默认配置
+		const defaultConfig = {
+			base_url: "http://127.0.0.1:8317/v1",
+			api_key: "1",
+			model: "gemini-3-flash-preview"
+		};
+
 		const request = {
-			url: `${api?.base_url || "https://api.openai.com/v1"}/chat/completions`,
+			url: `${api?.base_url || defaultConfig.base_url}/chat/completions`,
 			headers: {
 				"Content-Type": "application/json",
-				"Authorization": `Bearer ${api?.api_key || api?.Auth}`,
+				"Authorization": `Bearer ${api?.api_key || defaultConfig.api_key}`,
 			},
 			body: JSON.stringify({
-				model: api?.model || "gpt-4o-mini",
+				model: api?.model || defaultConfig.model,
 				messages: [
 					{
 						role: "system",
