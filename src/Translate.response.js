@@ -153,6 +153,10 @@ async function Translator(vendor = "Google", method = "Part", text = [], [source
 		case "DeepLX":
 			length = 20;
 			break;
+		case "OpenAI":
+			// 大模型可以处理更长的文本
+			length = 200;
+			break;
 	}
 	let Translation = [];
 	switch (method) {

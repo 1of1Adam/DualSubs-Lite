@@ -446,4 +446,56 @@ export default class Translate {
 			})
 			.catch(error => Promise.reject(error));
 	}
+
+	/**
+	 * OpenAI 兼容 API 翻译（支持 GPT、Claude、Gemini、DeepSeek、Qwen 等）
+	 * @param {Array|String} text - 要翻译的文本
+	 * @param {String} source - 源语言
+	 * @param {String} target - 目标语言
+	 * @param {Object} api - API 配置 { base_url, api_key, model }
+	 */
+	async OpenAI(text = [], source = this.Source, target = this.Target, api = this.API) {
+		text = Array.isArray(text) ? text : [text];
+		const sourceLang = this.#LanguagesCode.Google[source] ?? source.toLowerCase();
+		const targetLang = this.#LanguagesCode.Google[target] ?? target.toLowerCase();
+
+		const request = {
+			url: `${api?.base_url || "https://api.openai.com/v1"}/chat/completions`,
+			headers: {
+				"Content-Type": "application/json",
+				"Authorization": `Bearer ${api?.api_key || api?.Auth}`,
+			},
+			body: JSON.stringify({
+				model: api?.model || "gpt-4o-mini",
+				messages: [
+					{
+						role: "system",
+						content: `You are a professional subtitle translator. Translate the following text from ${sourceLang === "auto" ? "the source language" : sourceLang} to ${targetLang}.
+Rules:
+1. Return ONLY the translated text, nothing else
+2. Keep the same number of lines as input
+3. Each line should be translated separately
+4. Maintain the original tone and style
+5. Do not add explanations or notes`
+					},
+					{
+						role: "user",
+						content: text.join("\n")
+					}
+				],
+				temperature: 0.3,
+			}),
+		};
+
+		return await fetch(request)
+			.then(response => {
+				const body = JSON.parse(response.body);
+				const translatedText = body?.choices?.[0]?.message?.content;
+				if (!translatedText) {
+					throw new Error(`翻译失败, vendor: OpenAI, error: ${JSON.stringify(body)}`);
+				}
+				return translatedText.split("\n");
+			})
+			.catch(error => Promise.reject(error));
+	}
 }
