@@ -154,8 +154,8 @@ async function Translator(vendor = "OpenAI", method = "Part", text = [], [source
 			length = 20;
 			break;
 		case "OpenAI":
-			// 大模型可以处理更长的文本
-			length = 200;
+			// 大模型一次处理所有字幕，减少请求次数
+			length = 2000;
 			break;
 	}
 	let Translation = [];
